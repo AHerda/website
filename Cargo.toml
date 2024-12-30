@@ -1,0 +1,11 @@
+[package]
+name = "website"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["server", "app"]
+default-members = ["server"]
+
+[dependencies]
+serde = { version = "1.0.217", features = ["derive"] }

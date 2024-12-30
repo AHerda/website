@@ -1,0 +1,10 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.22"
+website = { version = "0.1.0", path = ".." }
+yew = { version = "0.21.0", features = ["csr"] }
+yew-router = "0.18.0"
