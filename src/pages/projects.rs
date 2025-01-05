@@ -1,23 +1,29 @@
-use actix_web::{get, web};
+use actix_web::{get, web::Json, Responder};
 use maud::{html, Markup};
+use serde::{Deserialize, Serialize};
 
 use super::{base::base, help::Pages};
 
-const PROJECTS: [Project; 3] = [
+const PROJECTS: [Project; 4] = [
     Project {
-        name: "Project 1",
-        description: "This is a simple project.",
-        link: None,
+        name: "Checkers",
+        description: "Simple project in java to learn the basics of programming.",
+        link: Some("https://github.com/AHerda/warcaby"),
     },
     Project {
-        name: "Project 2",
-        description: "This is another simple project.",
-        link: None,
+        name: "Radio Traffic Analyzer",
+        description: "Engineering thesis project. Developed in C++.",
+        link: Some("https://github.com/AHerda/sdr-analyzer"),
     },
     Project {
-        name: "Project 3",
-        description: "This is a third simple project.",
-        link: Some("https://example.com/project3"),
+        name: "Website",
+        description: "Website written in rust using actix-web and maud.",
+        link: Some("https://github.com/AHerda/website"),
+    },
+    Project {
+        name: "Compilator",
+        description: "Simple compiler written in C++.",
+        link: Some("https://github.com/AHerda/Kompilator"),
     },
 ];
 
@@ -25,10 +31,9 @@ const PROJECTS: [Project; 3] = [
 pub async fn projects() -> Markup {
     base(html! {
         h1 { "Projects" }
-        @let current_project = 0;
         .projects {
             @for (i, project) in PROJECTS.iter().enumerate() {
-                .project id=(if i == current_project { "active" } else { "inactive" }) {
+                .(format!("project {}", if i == 0 { "active" } else { "inactive" })) {
                     h2 { (project.name) }
                     p { (project.description) }
                     @if let Some(link) = project.link {
@@ -39,38 +44,25 @@ pub async fn projects() -> Markup {
         }
         .navigation {
             nav {
-                button #left_button hx-get="/projects/{(current_project + PROJECTS.len() - 1) % PROJECTS.len()}" hx-target=".projects" hx-trigger="click" hx-swap="outerHTML" {
+                button #left_button onclick="handleLeftClick()" {
                     i class="fa-solid fa-arrow-left" title="previous project" {}
                 }
-                button #right_button hx-get="/projects/{(current_project + PROJECTS.len() + 1) % PROJECTS.len()}" hx-target=".projects" hx-trigger="click" hx-swap="outerHTML" {
+                button #right_button onclick="handleRightClick()" {
                     i class="fa-solid fa-arrow-right" title="next project" {}
                 }
             }
-            p.project-page { (current_project + 1) " / " (PROJECTS.len()) }
-            p.info { "Click the arrows to navigate between projects." }
+            p .project-page { (1) " / " (PROJECTS.len()) }
+            p #info { "Click the arrows to navigate between projects." }
         }
     }, Pages::Projects)
 }
 
-#[get("/projects/{index}")]
-async fn print_projects(index: web::Path<usize>) -> Markup {
-    let index = index.into_inner();
-    println!("Index: {}", index);
-    html! {
-        .projects {
-            @for (i, project) in PROJECTS.iter().enumerate() {
-                .project id=(if i == index { "active" } else { "inactive" }) {
-                    h2 { (project.name) }
-                    p { (project.description) }
-                    @if let Some(link) = project.link {
-                        a href=(link) { "Link" }
-                    }
-                }
-            }
-        }
-    }
+#[get("/api/projects-json")]
+async fn projects_json() -> impl Responder {
+    Json(PROJECTS)
 }
 
+#[derive(Deserialize, Serialize)]
 struct Project<'a> {
     name: &'a str,
     description: &'a str,

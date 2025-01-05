@@ -52,6 +52,7 @@ main {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    height: 40%;
 }
 
 h1 {
@@ -87,6 +88,7 @@ a:hover {
 .projects {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     height: auto;
@@ -97,11 +99,19 @@ a:hover {
     margin-bottom: 3vh;
 }
 
+.project.active {
+    opacity: 1;
+}
+
+.project.inactive {
+    opacity: 0;
+}
+
 .project {
     width: 30vh;
     height: auto;
     margin: 3vh 0;
-    padding: 1vh;
+    padding: 3vh;
     background-color: #251c0b1a;
     border-radius: 10px;
 
@@ -109,16 +119,12 @@ a:hover {
     flex-direction: column;
 }
 
-.project#active {
-    opacity: 1;
-}
-
-.project#inactive {
-    opacity: 0;
-}
-
 .project * {
     margin: 1vh 0;
+}
+
+#info {
+    opacity: 0.2;
 }
 
 /* Footer */

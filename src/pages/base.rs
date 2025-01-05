@@ -12,9 +12,10 @@ pub fn base(body: Markup, page: Pages) -> Markup {
                 title { "AHerda's Simple Website" }
                 link rel="stylesheet" href="static/css/default.css";
                 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css";
+                script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous" {};
+                script src="static/js/default.js" {}
             } // head
             body {
-                script src="js/vendor/htmx.min.js" {}
                 header {
                     nav {
                         a href="/" class=@if page == Pages::Home { "active" } @else { "inactive" } { "Home" }

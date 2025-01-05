@@ -1,8 +1,8 @@
-use actix_web::{web::Redirect, App, HttpServer, HttpResponse};
+use actix_web::{web::Redirect, App, HttpServer};
 use actix_files::Files;
 
 mod pages;
-use pages::{home, about, projects};
+use pages::{about, home, projects};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -12,6 +12,7 @@ async fn main() -> std::io::Result<()> {
             .service(home::home)
             .service(about::about)
             .service(projects::projects)
+            .service(projects::projects_json)
             .service(Redirect::new("/home", "/"))
             .service(Redirect::new("/index", "/"))
             //.default_service(index::index)
