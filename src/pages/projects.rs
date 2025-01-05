@@ -21,7 +21,7 @@ const PROJECTS: [Project; 4] = [
         link: Some("https://github.com/AHerda/website"),
     },
     Project {
-        name: "Compilator",
+        name: "Compiler",
         description: "Simple compiler written in C++.",
         link: Some("https://github.com/AHerda/Kompilator"),
     },
@@ -30,7 +30,6 @@ const PROJECTS: [Project; 4] = [
 #[get("/projects")]
 pub async fn projects() -> Markup {
     base(html! {
-        h1 { "Projects" }
         .projects {
             @for (i, project) in PROJECTS.iter().enumerate() {
                 .(format!("project {}", if i == 0 { "active" } else { "inactive" })) {

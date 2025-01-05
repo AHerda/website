@@ -22,9 +22,24 @@ header {
     position: absolute;
     top: 20px;
     width: 100%;
+    padding: 0, 10vw;
     display: flex;
     justify-content: space-around;
-    padding: 0 20px;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    padding: 10px;
+    margin: 0 10px;
+    font-family: "Space Mono", monospace;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: auto;
 }
 
 header a {
@@ -55,15 +70,29 @@ main {
     height: 40%;
 }
 
-h1 {
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: auto;
+    margin: 5vh;
+}
+
+article * {
+    margin: 1vh 0;
+}
+
+/* main h1 {
     font-size: 3rem;
     margin-bottom: 3vh;
-}
+} */
 
 
 p {
     font-size: 1.2rem;
-    color: #bbbbbb;
+    color: #dedede;
 }
 
 button {
@@ -80,7 +109,7 @@ a {
     color: #bbbbbb;
     text-decoration: none;
 }
-
+#hacked:hover,
 a:hover {
     color: #00bcd4;
 }
@@ -112,7 +141,7 @@ a:hover {
     height: auto;
     margin: 3vh 0;
     padding: 3vh;
-    background-color: #251c0b1a;
+    background-color: #ffffff1a;
     border-radius: 10px;
 
     position: absolute;
@@ -133,6 +162,7 @@ footer {
     bottom: 20px;
     width: 100%;
     text-align: center;
+    opacity: 0.5;
 }
 
 footer * {
