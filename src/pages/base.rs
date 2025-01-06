@@ -17,16 +17,22 @@ pub fn base(body: Markup, page: Pages) -> Markup {
                 script src="static/js/hacked_letters.js" {};
             } // head
             body {
+                div .background {
+                    script src="static/js/background.js" {};
+                    canvas .background {}
+                }
                 header {
                     h1 { @match page {
                         Pages::Home => "Home",
                         Pages::About => "About",
                         Pages::Projects => "Projects",
+                        Pages::Visuals => "Visuals",
                     }}
                     nav {
                         a href="/" class=@if page == Pages::Home { "active" } @else { "inactive" } { "Home" }
                         a href="/about" class=@if page == Pages::About { "active" } @else { "inactive" } { "About" }
                         a href="/projects" class=@if page == Pages::Projects { "active" } @else { "inactive" } { "Projects" }
+                        a href="/visuals" class=@if page == Pages::Visuals { "active" } @else { "inactive" } { "Visuals" }
                     }
                 }
                 main {

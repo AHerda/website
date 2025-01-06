@@ -3,4 +3,5 @@ pub enum Pages {
     Home,
     About,
     Projects,
+    Visuals,
 }

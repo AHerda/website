@@ -6,7 +6,8 @@ use super::{base::base, help::Pages};
 #[get("/about")]
 pub async fn about() -> Markup {
     base(html! {
-        h1 #hacked data-value="About me" { "About me" }
+        @let title = "About me";
+        h1 #hacked data-value=(title) { (title) }
         article {
             p {
                 "Hello, I'm Adrian Herda, a student of Alghoritmic Computer Science at the Wroclaw's University of Science and Technology.
