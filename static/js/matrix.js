@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function matrix() {
     const canvasMatrix = document.querySelector('canvas.visual');
     const ctxMatrix = canvasMatrix.getContext('2d');
 
@@ -49,4 +49,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     drawMatrix();
-});
+}

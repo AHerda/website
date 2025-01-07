@@ -71,6 +71,10 @@ main {
     height: 50%;
 }
 
+main * {
+    margin: 1vmin;
+}
+
 .background {
     position: fixed;
     top: 0;
@@ -80,6 +84,7 @@ main {
     z-index: -1;
 }
 
+.contact_button,
 article {
     display: flex;
     flex-direction: column;
@@ -139,7 +144,7 @@ a:hover {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: auto;
+    height: 100%;
     margin: 3vmin;
 }
 
@@ -172,6 +177,16 @@ a:hover {
 
 #info {
     opacity: 0.2;
+}
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.contact * {
+    padding: 0 2vmin;
 }
 
 /* Footer */

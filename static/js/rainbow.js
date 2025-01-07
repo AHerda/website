@@ -1,5 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const paper = document.querySelector("canvas.visual");
+function rainbow() {
+    console.log("raibow function called");
+    let paper = document.querySelector("canvas.visual");
+    if (paper == null) {
+        console.log("Canvas not found");
+    } else {
+        console.log("Canvas found");
+    }
     paper.width = window.innerWidth * 0.7;
     paper.height = paper.width * 0.5;
 
@@ -43,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Rysowanie kropki
         pen.beginPath();
         let pos = position(centerWidth, centerHeight, radius, angle);
-        pen.arc(pos.x, pos.y, 10, 0, 2 * Math.PI);
+        pen.arc(pos.x, pos.y, paper.height * .02, 0, 2 * Math.PI);
         pen.fillStyle = color;
         pen.shadowColor = color;
         pen.shadowBlur = 10;
@@ -83,17 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
         pen.beginPath();
         pen.strokeStyle = settings["mainColor"];
         pen.lineWidth = 3;
-        pen.moveTo(width * .1, height * .85);
-        pen.lineTo(width * .9, height * .85);
+        pen.moveTo(width * .1, height * .84);
+        pen.lineTo(width * .9, height * .84);
         pen.stroke();
 
         info.forEach((arc, i) => {
-            let radius = (i + 1) * (height * .65) / settings["numberOfArcs"];
+            let radius = (i + 1) * (height * .68) / settings["numberOfArcs"];
 
-            drawArc(width / 2, height * .8, radius, settings["mainColor"]);
+            drawArc(width / 2, height * .82, radius, settings["mainColor"]);
 
             pen.globalAlpha = Math.max(1 - ((runTime - arc.timeOfPreviousCollision) / (settings["opacityChangeDuration"] * 1000)), 0);
-            drawArc(width / 2, height * .8, radius, arc.color);
+            drawArc(width / 2, height * .82, radius, arc.color);
             pen.globalAlpha = 1;
 
             if (runTime > arc.timeOfNextCollision) {
@@ -106,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            drawPoint(width / 2, height * .8, radius, arc.color, runTime / 1000, i);
+            drawPoint(width / 2, height * .82, radius, arc.color, runTime / 1000, i);
         });
 
         requestAnimationFrame(run);
@@ -118,4 +124,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     init();
     run();
-});
+}

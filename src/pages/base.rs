@@ -15,6 +15,8 @@ pub fn base(body: Markup, page: Pages) -> Markup {
                 script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous" {};
                 script src="static/js/projects_change.js" {};
                 script src="static/js/hacked_letters.js" {};
+                script src="static/js/rainbow.js" {};
+                script src="static/js/matrix.js" {};
             } // head
             body {
                 div .background {
@@ -27,20 +29,22 @@ pub fn base(body: Markup, page: Pages) -> Markup {
                         Pages::About => "About",
                         Pages::Projects => "Projects",
                         Pages::Visuals => "Visuals",
+                        Pages::Contact => "Contact",
                     }}
                     nav {
                         a href="/" class=@if page == Pages::Home { "active" } @else { "inactive" } { "Home" }
                         a href="/about" class=@if page == Pages::About { "active" } @else { "inactive" } { "About" }
                         a href="/projects" class=@if page == Pages::Projects { "active" } @else { "inactive" } { "Projects" }
                         a href="/visuals" class=@if page == Pages::Visuals { "active" } @else { "inactive" } { "Visuals" }
+                        a href="/contact" class=@if page == Pages::Contact { "active" } @else { "inactive" } { "Contact" }
                     }
                 }
                 main {
                     (body)
                 }
                 footer {
-                    p { "Created by Adrian Herda." }
-                    a href="https://github.com/AHerda" { "GitHub" }
+                    p { "Website created by Adrian Herda." }
+                    a href="https://github.com/AHerda/website" { "Source Code" }
                 }
             } // body
         } // html
