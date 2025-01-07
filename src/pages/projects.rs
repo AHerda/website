@@ -29,31 +29,34 @@ const PROJECTS: [Project; 4] = [
 
 #[get("/projects")]
 pub async fn projects() -> Markup {
-    base(html! {
-        .projects {
-            @for (i, project) in PROJECTS.iter().enumerate() {
-                .(format!("project {}", if i == 0 { "active" } else { "inactive" })) {
-                    h2 { (project.name) }
-                    p { (project.description) }
-                    @if let Some(link) = project.link {
-                        a href=(link) { "Link" }
+    base(
+        html! {
+            .projects {
+                @for (i, project) in PROJECTS.iter().enumerate() {
+                    .(format!("project {}", if i == 0 { "active" } else { "inactive" })) {
+                        h2 { (project.name) }
+                        p { (project.description) }
+                        @if let Some(link) = project.link {
+                            a href=(link) { "Link" }
+                        }
                     }
                 }
             }
-        }
-        .navigation {
-            nav {
-                button #left_button onclick="handleLeftClick()" {
-                    i class="fa-solid fa-arrow-left" title="previous project" {}
+            .navigation {
+                nav {
+                    button #left_button onclick="handleLeftClick()" {
+                        i class="fa-solid fa-arrow-left" title="previous project" {}
+                    }
+                    button #right_button onclick="handleRightClick()" {
+                        i class="fa-solid fa-arrow-right" title="next project" {}
+                    }
                 }
-                button #right_button onclick="handleRightClick()" {
-                    i class="fa-solid fa-arrow-right" title="next project" {}
-                }
+                p .project-page { (1) " / " (PROJECTS.len()) }
+                p #info { "Click the arrows to navigate between projects." }
             }
-            p .project-page { (1) " / " (PROJECTS.len()) }
-            p #info { "Click the arrows to navigate between projects." }
-        }
-    }, Pages::Projects)
+        },
+        Pages::Projects,
+    )
 }
 
 #[get("/api/projects-json")]

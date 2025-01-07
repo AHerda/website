@@ -1,5 +1,5 @@
-use actix_web::{web::Redirect, App, HttpServer};
 use actix_files::Files;
+use actix_web::{web::Redirect, App, HttpServer};
 
 mod pages;
 use pages::{about, contact, home, projects, visuals};
@@ -18,9 +18,9 @@ async fn main() -> std::io::Result<()> {
             .service(contact::contact)
             .service(Redirect::new("/home", "/"))
             .service(Redirect::new("/index", "/"))
-            //.default_service(index::index)
+        //.default_service(index::index)
     })
-        .bind(("127.0.0.1", 8080))?
-        .run()
-        .await
+    .bind(("127.0.0.1", 8080))?
+    .run()
+    .await
 }

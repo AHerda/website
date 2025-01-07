@@ -3,6 +3,7 @@ use maud::{html, Markup, DOCTYPE};
 use super::help::Pages;
 
 pub fn base(body: Markup, page: Pages) -> Markup {
+    println!("Connection caught");
     html! {
         (DOCTYPE)
         html {
