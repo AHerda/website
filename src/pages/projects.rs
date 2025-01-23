@@ -2,7 +2,8 @@ use actix_web::{get, web::Json, Responder};
 use maud::{html, Markup};
 use serde::{Deserialize, Serialize};
 
-use super::{base::base, help::Pages};
+use super::base::base;
+use crate::helpers::pages_enum::Pages;
 
 const PROJECTS: [Project; 4] = [
     Project {

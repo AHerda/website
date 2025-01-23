@@ -1,7 +1,10 @@
 use actix_files::Files;
 use actix_web::{web::Redirect, App, HttpServer};
 
+mod components;
+mod helpers;
 mod pages;
+
 use pages::{about, contact, home, projects, visuals};
 
 #[actix_web::main]

@@ -1,6 +1,6 @@
 use maud::{html, Markup, DOCTYPE};
 
-use super::help::Pages;
+use crate::helpers::pages_enum::Pages;
 
 pub fn base(body: Markup, page: Pages) -> Markup {
     println!("Connection caught");

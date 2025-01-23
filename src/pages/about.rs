@@ -1,7 +1,8 @@
 use actix_web::get;
 use maud::{html, Markup};
 
-use super::{base::base, help::Pages};
+use super::base::base;
+use crate::helpers::pages_enum::Pages;
 
 #[get("/about")]
 pub async fn about() -> Markup {

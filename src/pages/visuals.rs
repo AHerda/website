@@ -1,7 +1,8 @@
 use actix_web::{get, web};
 use maud::{html, Markup};
 
-use super::{base::base, help::Pages};
+use super::base::base;
+use crate::helpers::pages_enum::Pages;
 
 #[get("/visuals")]
 async fn visuals() -> Markup {
