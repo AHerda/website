@@ -6,6 +6,8 @@ function matrix() {
     canvasMatrix.width = window.innerWidth * 0.7;
     canvasMatrix.height = canvasMatrix.width * 0.5;
 
+    ctxMatrix.clearRect(0, 0, canvasMatrix.width, canvasMatrix.height);
+
     // Characters to display
     const lettersMatrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const fontSize = 16;

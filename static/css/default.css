@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-html {
-    width: 100%;
-    height: 100%;
-}
-
 /* Body Styling */
 body {
     background-color: #121212;
@@ -28,7 +23,7 @@ header {
     position: absolute;
     top: 20px;
     width: 100%;
-    padding: 0, 10vw;
+    padding: 0, 10vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -120,7 +115,6 @@ button {
     background-color: #251c0b1a;
     color: #ffffff;
     font-size: 2rem;
-    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -132,19 +126,33 @@ a {
 .visual {
     border: 3px solid #00bcd4;
     border-radius: 10px;
-    width: 70vw;
+    width: 70%;
+    max-height: 70vh;
     aspect-ratio: 2 / 1;
     margin: 2vh;
 }
 
 #hacked:hover,
+button:hover,
 a:hover {
     color: #00bcd4;
 }
 
-.contact {
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -154,43 +162,26 @@ a:hover {
 }
 
 .contact_button {
-    display: flex;
-    flex-direction: column;
     justify-content: start;
     height: auto;
 }
 
 .projects {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    margin: 3vmin;
+    height: max-content;
 }
 
 .projects h1 {
     margin-bottom: 3vh;
 }
 
-.project.active {
-    opacity: 1;
-}
-
-.project.inactive {
-    opacity: 0;
-}
-
 .project {
-    width: 30vh;
-    height: auto;
     padding: 3vh;
     background-color: #ffffff1a;
     border-radius: 10px;
+}
 
-    position: absolute;
-    flex-direction: column;
+.project.inactive {
+    display: none;
 }
 
 .project * {

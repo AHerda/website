@@ -1,7 +1,8 @@
 use actix_files::Files;
 use actix_web::{web::Redirect, App, HttpServer};
 
-mod components;
+pub mod components;
+mod data;
 mod helpers;
 mod pages;
 
@@ -23,7 +24,7 @@ async fn main() -> std::io::Result<()> {
             .service(Redirect::new("/index", "/"))
         //.default_service(index::index)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("127.0.0.1", 80))?
     .run()
     .await
 }

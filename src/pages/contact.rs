@@ -10,7 +10,7 @@ async fn contact() -> Markup {
         html! {
             @let title = "How to contact me";
             h1 #hacked data-value=(title) { (title) }
-            .contact {
+            ."contact row" {
                 @for contact_button in vec![
                     ContactButton::new("mail", "solid", Some("envelope")),
                 ] {
@@ -18,7 +18,7 @@ async fn contact() -> Markup {
                 }
             }
             h1 { "Also check out" }
-            .contact {
+            ."contact row" {
                 @for contact_button in vec![
                     ContactButton::new("facebook", "brands", None),
                     ContactButton::new("instagram", "brands", None),
@@ -54,9 +54,8 @@ impl ContactButton {
 
     fn display(&self) -> Markup {
         html! {
-            .contact_button {
+            ."contact_button column" {
                 button #(self.name) {
-
                     i .(format!("fa-{} fa-{}", self.icon_font_class, self.icon_name.clone().unwrap_or(self.name.clone()))) {}
                 }
                 label for=(self.name) { (Self::uppercase_first(&self.name)) }

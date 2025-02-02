@@ -10,6 +10,7 @@ function rainbow() {
     paper.height = paper.width * 0.5;
 
     const pen = paper.getContext("2d");
+    pen.clearRect(0, 0, paper.width, paper.height);
 
     const settings = {
         start: Date.now(),

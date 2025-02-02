@@ -2,7 +2,15 @@ use actix_web::{get, web};
 use maud::{html, Markup};
 
 use super::base::base;
-use crate::helpers::pages_enum::Pages;
+use crate::{
+    components::{button::{Button, Tag}, icon::Icon},
+    helpers::{
+        htmx,
+        display_html::DisplayHtml,
+        flex_enum::FlexEnum,
+        pages_enum::Pages,
+    },
+};
 
 #[get("/visuals")]
 async fn visuals() -> Markup {
@@ -17,15 +25,47 @@ async fn visuals() -> Markup {
             }
             .navigation {
                 nav {
-                    button #matrix_button hx-get="/visuals/matrix" hx-target="div.div_visual" hx-swap="innerHTML" {
-                        i class="fa-solid fa-cloud-rain" title="Synchronic Sounds" {}
-                    }
-                    button #rainbow_button hx-get="/visuals/rainbow" hx-target="div.div_visual" hx-swap="innerHTML" {
-                        i class="fa-solid fa-rainbow" title="Matrix Visual" {}
-                    }
+                    (
+                        Button::new(
+                            vec![Box::new(Icon::new(
+                                "fa-rainbow".to_string(),
+                                "fa-solid".to_string(),
+                                Some("Synchronic Sounds".to_string())
+                            ))],
+                            Some("rainbow_button".to_string()),
+                            vec![],
+                            FlexEnum::Column,
+                        )
+                            .add_tag(Tag::HtmxTag(htmx::HtmxTag::new(
+                                htmx::HtmxRequest::Get("/visuals/rainbow".to_string()),
+                                "click".to_string(),
+                                htmx::HtmxSwap::OuterHtml,
+                                "script.visual".to_string(),
+                                None
+                            )))
+                            .display_html()
+                    )
+                    (
+                        Button::new(
+                            vec![Box::new(Icon::new(
+                                "fa-cloud-rain".to_string(),
+                                "fa-solid".to_string(),
+                                Some("Matrix Visual".to_string())
+                            ))],
+                            Some("matrix_button".to_string()),
+                            vec![],
+                            FlexEnum::Column,
+                        )
+                            .add_tag(Tag::HtmxTag(htmx::HtmxTag::new(
+                                htmx::HtmxRequest::Get("/visuals/matrix".to_string()),
+                                "click".to_string(),
+                                htmx::HtmxSwap::OuterHtml,
+                                "script.visual".to_string(),
+                                None
+                            )))
+                            .display_html()
+                    )
                 }
-                // p .project-page { (1) " / " (PROJECTS.len()) }
-                p #info { "Click the arrows to navigate between projects." }
             }
         },
         Pages::Visuals,
@@ -35,7 +75,6 @@ async fn visuals() -> Markup {
 #[get("/visuals/{visual}")]
 async fn visual(visual: web::Path<String>) -> Markup {
     html!(
-        cavnas .visual {}
         script .visual { (visual) "();" };
     )
 }

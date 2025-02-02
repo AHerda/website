@@ -1,58 +1,77 @@
-use actix_web::{get, web::Json, Responder};
+use actix_web::{
+    get,
+    web::{self, Json, JsonBody},
+    HttpResponse, Responder,
+};
 use maud::{html, Markup};
-use serde::{Deserialize, Serialize};
 
 use super::base::base;
-use crate::helpers::pages_enum::Pages;
-
-const PROJECTS: [Project; 4] = [
-    Project {
-        name: "Checkers",
-        description: "Simple project in java to learn the basics of programming.",
-        link: Some("https://github.com/AHerda/warcaby"),
+use crate::{
+    components::{button::{Button, Tag}, icon::Icon},
+    data::project_list::PROJECTS,
+    helpers::{
+        display_html::DisplayHtml,
+        flex_enum::FlexEnum,
+        pages_enum::Pages,
     },
-    Project {
-        name: "Radio Traffic Analyzer",
-        description: "Engineering thesis project. Developed in C++.",
-        link: Some("https://github.com/AHerda/sdr-analyzer"),
-    },
-    Project {
-        name: "Website",
-        description: "Website written in rust using actix-web and maud.",
-        link: Some("https://github.com/AHerda/website"),
-    },
-    Project {
-        name: "Compiler",
-        description: "Simple compiler written in C++.",
-        link: Some("https://github.com/AHerda/Kompilator"),
-    },
-];
+};
 
 #[get("/projects")]
 pub async fn projects() -> Markup {
+    let projects = {
+        PROJECTS.read().expect("Failed to retreive projects").clone()
+    };
     base(
         html! {
             .projects {
-                @for (i, project) in PROJECTS.iter().enumerate() {
-                    .(format!("project {}", if i == 0 { "active" } else { "inactive" })) {
-                        h2 { (project.name) }
-                        p { (project.description) }
-                        @if let Some(link) = project.link {
-                            a href=(link) { "Link" }
-                        }
-                    }
+                @for (i, proj) in projects.iter().enumerate() {
+                    (
+                        proj
+                            .set_class(if i == 0 { "active" } else { "inactive" })
+                            .display_html()
+                    )
                 }
             }
             .navigation {
                 nav {
-                    button #left_button onclick="handleLeftClick()" {
-                        i class="fa-solid fa-arrow-left" title="previous project" {}
-                    }
-                    button #right_button onclick="handleRightClick()" {
-                        i class="fa-solid fa-arrow-right" title="next project" {}
-                    }
+                    (
+                        Button::new(
+                            vec![
+                                Box::new(Icon::new(
+                                    "fa-arrow-left".to_string(),
+                                    "fa-solid".to_string(),
+                                    Some("previous project".to_string())
+                                ))
+                            ],
+                            Some("left_button".to_string()),
+                            Vec::new(),
+                            FlexEnum::Row,
+                        )
+                            .add_tag(
+                                Tag::OnClick("handleLeftClick()".to_string())
+                            )
+                            .display_html()
+                    )
+                    (
+                        Button::new(
+                            vec![
+                                Box::new(Icon::new(
+                                    "fa-arrow-right".to_string(),
+                                    "fa-solid".to_string(),
+                                    Some("next project".to_string())
+                                ))
+                            ],
+                            Some("right_button".to_string()),
+                            Vec::new(),
+                            FlexEnum::Row,
+                        )
+                            .add_tag(
+                                Tag::OnClick("handleRightClick()".to_string())
+                            )
+                            .display_html()
+                    )
                 }
-                p .project-page { (1) " / " (PROJECTS.len()) }
+                p #page_no { "1 / 4" }
                 p #info { "Click the arrows to navigate between projects." }
             }
         },
@@ -60,14 +79,16 @@ pub async fn projects() -> Markup {
     )
 }
 
-#[get("/api/projects-json")]
+#[get("/api/projects/json")]
 async fn projects_json() -> impl Responder {
-    Json(PROJECTS)
+    let projects_json = PROJECTS.read().expect("Failed to retreive projects").clone();
+    // FIXME: Change this to return JSON
+    HttpResponse::Ok().content_type("application/json").body(format!("{:#?}", projects_json))
 }
 
-#[derive(Deserialize, Serialize)]
-struct Project<'a> {
-    name: &'a str,
-    description: &'a str,
-    link: Option<&'a str>,
-}
+// #[get("/api/projects/project")]
+// async fn project(project_name: web::Json<String>) -> HttpResponse {
+//     println!("{:?}", project_name);
+
+//     HttpResponse::Ok().finish()
+// }
