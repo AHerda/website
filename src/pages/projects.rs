@@ -1,6 +1,5 @@
 use actix_web::{
     get,
-    web::{self, Json, JsonBody},
     HttpResponse, Responder,
 };
 use maud::{html, Markup};

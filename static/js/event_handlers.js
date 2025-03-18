@@ -24,3 +24,28 @@ const handleRightClick = () => {
 
     page_no.innerText = activeIndex + " / " + projects.length;
 }
+
+const toggleMenu = () => {
+  const hamburger = document.getElementById("burger_menu");
+  console.log(hamburger);
+  const navMenu = document.querySelector("nav.header");
+  console.log(navMenu);
+
+  if (hamburger.classList.contains("active")) {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+    return;
+  }
+  hamburger.classList.add("active");
+  navMenu.classList.add("active");
+}
+
+document.querySelectorAll("nav.header a").forEach(n => n.addEventListener("click", () => {
+  const hamburger = document.getElementById("burger_menu");
+  console.log(hamburger);
+  const navMenu = document.querySelector("nav.header");
+  console.log(navMenu);
+
+  hamburger.classList.remove("active");
+  navMenu.classList.remove("active");
+}))
