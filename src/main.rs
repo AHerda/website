@@ -6,13 +6,14 @@ mod data;
 mod helpers;
 mod pages;
 
-use pages::{about, contact, home, projects, visuals};
+use pages::{about, contact, home, projects, visuals, cv};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(Files::new("/static", "./static"))
+            .service(cv::file)
             .service(home::home)
             .service(about::about)
             .service(projects::projects)

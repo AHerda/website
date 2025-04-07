@@ -25,13 +25,7 @@ pub fn base(body: Markup, page: Pages) -> Markup {
                     canvas .background {}
                 }
                 header {
-                    h1.header { @match page {
-                        Pages::Home => "Home",
-                        Pages::About => "About",
-                        Pages::Projects => "Projects",
-                        Pages::Visuals => "Visuals",
-                        Pages::Contact => "Contact",
-                    }}
+                    h1.header { "AHerda" }
                     #header_menu {
                         #burger_menu onclick="toggleMenu()" {
                             span.bar {}

@@ -3,13 +3,11 @@ use maud::{html, Markup};
 
 use super::base::base;
 use crate::{
-    components::{button::{Button, Tag}, icon::Icon},
-    helpers::{
-        htmx,
-        display_html::DisplayHtml,
-        flex_enum::FlexEnum,
-        pages_enum::Pages,
+    components::{
+        button::{Button, Tag},
+        icon::Icon,
     },
+    helpers::{display_html::DisplayHtml, flex_enum::FlexEnum, htmx, pages_enum::Pages},
 };
 
 #[get("/visuals")]

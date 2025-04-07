@@ -120,7 +120,10 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50%;
+    position: absolute;
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 main * {

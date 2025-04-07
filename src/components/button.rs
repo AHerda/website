@@ -42,7 +42,8 @@ impl DisplayHtml for Button {
         let classes = self.classes.join(" ")
             + if self.classes.is_empty() { "" } else { " " }
             + &self.flex.to_string();
-        let id = self.id.clone().unwrap_or("basic_button".to_string());
+        let basic_button = "basic_button".to_string();
+        let id = self.id.as_ref().unwrap_or(&basic_button);
         let body = html! {
             @for component in &self.components {
                 (component.display_html())

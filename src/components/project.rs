@@ -12,7 +12,11 @@ pub struct Project<'a> {
 }
 
 impl Project<'_> {
-    pub const fn new<'a>(name: &'a str, description: &'a str, link: Option<&'a str>) -> Project<'a> {
+    pub const fn new<'a>(
+        name: &'a str,
+        description: &'a str,
+        link: Option<&'a str>,
+    ) -> Project<'a> {
         Project {
             name,
             class: "",
@@ -21,7 +25,10 @@ impl Project<'_> {
         }
     }
 
-    pub fn set_class<'a>(mut self, class: &'a str) -> Self where 'a: 'static {
+    pub fn set_class<'a>(mut self, class: &'a str) -> Self
+    where
+        'a: 'static,
+    {
         self.class = class;
         self
     }

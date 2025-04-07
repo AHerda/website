@@ -1,27 +1,28 @@
-use actix_web::{
-    get,
-    HttpResponse, Responder,
-};
+use actix_web::{get, HttpResponse, Responder};
 use maud::{html, Markup};
 
 use super::base::base;
 use crate::{
-    components::{button::{Button, Tag}, icon::Icon},
-    data::project_list::PROJECTS,
-    helpers::{
-        display_html::DisplayHtml,
-        flex_enum::FlexEnum,
-        pages_enum::Pages,
+    components::{
+        button::{Button, Tag},
+        icon::Icon,
     },
+    data::project_list::PROJECTS,
+    helpers::{display_html::DisplayHtml, flex_enum::FlexEnum, pages_enum::Pages},
 };
 
 #[get("/projects")]
 pub async fn projects() -> Markup {
     let projects = {
-        PROJECTS.read().expect("Failed to retreive projects").clone()
+        PROJECTS
+            .read()
+            .expect("Failed to retreive projects")
+            .clone()
     };
     base(
         html! {
+            @let title = "Projects";
+            h1 #hacked data-value=(title) { (title) }
             .projects {
                 @for (i, proj) in projects.iter().enumerate() {
                     (
@@ -80,9 +81,14 @@ pub async fn projects() -> Markup {
 
 #[get("/api/projects/json")]
 async fn projects_json() -> impl Responder {
-    let projects_json = PROJECTS.read().expect("Failed to retreive projects").clone();
+    let projects_json = PROJECTS
+        .read()
+        .expect("Failed to retreive projects")
+        .clone();
     // FIXME: Change this to return JSON
-    HttpResponse::Ok().content_type("application/json").body(format!("{:#?}", projects_json))
+    HttpResponse::Ok()
+        .content_type("application/json")
+        .body(format!("{:#?}", projects_json))
 }
 
 // #[get("/api/projects/project")]
